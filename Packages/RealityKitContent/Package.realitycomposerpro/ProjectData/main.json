@@ -1,0 +1,21 @@
+{
+  "pathsToIds" : {
+    "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/GridMaterial.usda" : "CB766F92-EE55-4A63-9401-E7B8C009764D",
+    "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive.usda" : "65F6F990-A780-4474-B78B-572E0E4E273D",
+    "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "0A9B4653-B11E-4D6A-850E-C6FCB621626C",
+    "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Untitled Scene.usda" : "D560BB77-AAF3-4BDE-B7C4-989332A4688B",
+    "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Untitled%20Scene.usda" : "1069B907-A010-411E-9036-FADDACDB7909",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/FlowerBloomingScene.usda" : "C505A595-01E2-413C-A603-FBBB6EC68B97",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/GridMaterial.usda" : "66168B71-AB05-424E-8B6C-D33D6E61B08F",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive.usda" : "AF09ED6F-1707-48FD-8720-65B998362C09",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/PortalTriangleScene.usda" : "6147370C-A99E-4522-9832-EC4184CBE781",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "D66134B1-3681-4A8E-AFE5-29F257229F3B"
+  },
+  "projectID" : 6672582572863685202,
+  "uuidToIntID" : {
+    "1069B907-A010-411E-9036-FADDACDB7909" : -58885977024298877,
+    "6147370C-A99E-4522-9832-EC4184CBE781" : 4732741649262103483,
+    "AF09ED6F-1707-48FD-8720-65B998362C09" : -6439652868095370851,
+    "C505A595-01E2-413C-A603-FBBB6EC68B97" : 5555869173097150953
+  }
+}
