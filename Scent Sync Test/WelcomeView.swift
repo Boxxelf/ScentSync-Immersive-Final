@@ -46,6 +46,14 @@ struct WelcomeView: View {
                 )
 
             VStack(alignment: .leading, spacing: 24) {
+                // Logo in top right
+                HStack {
+                    Spacer()
+                    LogoView()
+                }
+                .padding(.top, 20)
+                .padding(.trailing, 32)
+                
                 Spacer(minLength: 12)
 
                 // ScentSync Product Introduction
@@ -59,6 +67,58 @@ struct WelcomeView: View {
                         .foregroundStyle(.white.opacity(0.9))
                         .frame(maxWidth: 500, alignment: .leading)
                         .lineSpacing(4)
+                    
+                    // Audio control buttons
+                    HStack(spacing: 12) {
+                        Button {
+                            // Replay audio
+                            audioPlayer.playAudio(fileName: "intro_voiceover", fileExtension: "mp3", volume: 0.9, numberOfLoops: 0)
+                        } label: {
+                            HStack(spacing: 6) {
+                                Image(systemName: "arrow.clockwise")
+                                    .font(.system(size: 14, weight: .semibold))
+                                Text("Replay")
+                                    .font(.system(size: 14, weight: .medium))
+                            }
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        
+                        Button {
+                            // Stop audio
+                            audioPlayer.stop()
+                        } label: {
+                            HStack(spacing: 6) {
+                                Image(systemName: "stop.fill")
+                                    .font(.system(size: 14, weight: .semibold))
+                                Text("Stop")
+                                    .font(.system(size: 14, weight: .medium))
+                            }
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.top, 8)
                 }
 
                 Spacer()
@@ -128,8 +188,37 @@ struct WelcomeView: View {
                             }
                             .buttonStyle(.plain)
                             
-                            // Collection 3-5
-                            ForEach(2..<5) { index in
+                            // Collection 3: Bubble Bath
+                            NavigationLink {
+                                ScentDetailView(scent: ScentInfo(
+                                    title: "Bubble Bath",
+                                    description: "A fresh and clean fragrance that captures the essence of a luxurious bubble bath with soap bubbles, delicate rose, soft white musk, and creamy coconut milk.",
+                                    category: "COLLECTION",
+                                    type: "Eau de Toilette • Fresh Floral",
+                                    videoFileName: "bubblebath",
+                                    accentColor: .blue
+                                ))
+                                .environment(appModel)
+                            } label: {
+                                RoundedRectangle(cornerRadius: 24)
+                                    .fill(.ultraThinMaterial)
+                                    .frame(width: 220, height: 140)
+                                    .overlay(
+                                        VStack(alignment: .leading) {
+                                            Text("Bubble Bath")
+                                                .font(.headline)
+                                            Text("Tap to preview")
+                                                .font(.footnote)
+                                                .opacity(0.8)
+                                        }
+                                        .padding()
+                                        .foregroundStyle(.white)
+                                    )
+                            }
+                            .buttonStyle(.plain)
+                            
+                            // Collection 4-5 (Placeholders)
+                            ForEach(3..<5) { index in
                                 Button {
                                     // Placeholder for future navigation
                                 } label: {
@@ -161,8 +250,8 @@ struct WelcomeView: View {
         .padding(.horizontal, 40)
         .padding(.vertical, 48)
         .onAppear {
-            // Play intro voiceover when WelcomeView appears
-            audioPlayer.playAudio(fileName: "intro_voiceover", fileExtension: "mp3")
+            // Play intro voiceover when WelcomeView appears at higher volume
+            audioPlayer.playAudio(fileName: "intro_voiceover", fileExtension: "mp3", volume: 0.9, numberOfLoops: 0)
         }
         .onDisappear {
             // Stop audio when view disappears

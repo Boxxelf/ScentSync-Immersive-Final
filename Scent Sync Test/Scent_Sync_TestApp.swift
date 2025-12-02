@@ -53,6 +53,21 @@ struct Scent_Sync_TestApp: App {
         }
         .immersionStyle(selection: .constant(.mixed), in: .mixed)
         
+        // Bubble Bath Immersive Space
+        ImmersiveSpace(id: AppModel.bubbleBathImmersiveSpaceID) {
+            BubbleBathImmersiveView()
+                .environment(appModel)
+                .onAppear {
+                    appModel.immersiveSpaceState = .open
+                    print("✅ Bubble Bath ImmersiveSpace appeared")
+                }
+                .onDisappear {
+                    appModel.immersiveSpaceState = .closed
+                    print("❌ Bubble Bath ImmersiveSpace disappeared")
+                }
+        }
+        .immersionStyle(selection: .constant(.mixed), in: .mixed)
+        
         // Legacy ImmersiveSpace (kept for backward compatibility)
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()

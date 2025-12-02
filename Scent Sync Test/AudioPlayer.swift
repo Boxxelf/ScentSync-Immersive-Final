@@ -14,7 +14,7 @@ class AudioPlayer: NSObject {
     private var audioPlayer: AVAudioPlayer?
     var isPlaying: Bool = false
     
-    func playAudio(fileName: String, fileExtension: String = "mp3") {
+    func playAudio(fileName: String, fileExtension: String = "mp3", volume: Float = 1.0, numberOfLoops: Int = 0) {
         // Stop any currently playing audio
         stop()
         
@@ -30,10 +30,12 @@ class AudioPlayer: NSObject {
             
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.delegate = self
+            audioPlayer?.volume = volume
+            audioPlayer?.numberOfLoops = numberOfLoops
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
             isPlaying = true
-            print("🔊 Started playing audio: \(fileName).\(fileExtension)")
+            print("🔊 Started playing audio: \(fileName).\(fileExtension) at volume \(volume), loops: \(numberOfLoops)")
         } catch {
             print("❌ Error playing audio: \(error.localizedDescription)")
             isPlaying = false

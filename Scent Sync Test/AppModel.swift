@@ -14,6 +14,7 @@ class AppModel {
     // Immersive Space IDs for different scents
     static let springtimeImmersiveSpaceID = "SpringtimeImmersiveSpace"
     static let lazySundayImmersiveSpaceID = "LazySundayImmersiveSpace"
+    static let bubbleBathImmersiveSpaceID = "BubbleBathImmersiveSpace"
     
     // Legacy immersive space ID (kept for backward compatibility)
     let immersiveSpaceID = "ImmersiveSpace"
@@ -35,6 +36,8 @@ class AppModel {
             return AppModel.springtimeImmersiveSpaceID
         case "Lazy Sunday Morning":
             return AppModel.lazySundayImmersiveSpaceID
+        case "Bubble Bath":
+            return AppModel.bubbleBathImmersiveSpaceID
         default:
             return AppModel.springtimeImmersiveSpaceID // Default fallback
         }

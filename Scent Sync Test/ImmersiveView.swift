@@ -22,6 +22,8 @@ struct ImmersiveView: View {
     @State private var lilyEntity1: Entity? = nil //  to store animated_blooming_lily_1
     @State private var lilyEntity2: Entity? = nil //  to store animated_blooming_lily_2
     @State private var flowerSceneEntity: Entity? = nil //  to store FlowerBloomingScene root
+    @State private var isFlowerSceneVisible = false //  to control FlowerBloomingScene visibility
+    @State private var bgmPlayer = BGMAudioPlayer() //  to play BGM
     
     private enum SkyboxError: Error { case unableToLoadTexture }
     
@@ -96,10 +98,16 @@ struct ImmersiveView: View {
                 createPortals()
                 print("✅ Portals created")
                 
-                // Load FlowerBloomingScene
+                // Load FlowerBloomingScene (initially hidden)
                 print("🌸 Loading flower scene...")
                 await loadFlowerScene(content: content)
                 print("✅ Flower scene loaded")
+                
+                // Setup Box for tap interaction
+                setupBoxInteraction()
+                
+                // Apply textures to textboxes
+                await applyTextboxTextures(to: immersiveContentEntity)
                 
             } catch {
                 print("❌ ERROR loading PortalTriangleScene: \(error)")
@@ -112,6 +120,13 @@ struct ImmersiveView: View {
             SpatialTapGesture()
                 .targetedToAnyEntity()
                 .onEnded { value in
+                    // Check if Box or its children were tapped
+                    if value.entity == box || isDescendantOf(entity: value.entity, ancestor: box) {
+                        // Toggle FlowerBloomingScene visibility
+                        toggleFlowerScene()
+                        return
+                    }
+                    
                     // Check if the tapped entity is any of the lilies or their descendants
                     if let lily = lilyEntity {
                         if value.entity == lily || isDescendantOf(entity: value.entity, ancestor: lily) {
@@ -133,6 +148,14 @@ struct ImmersiveView: View {
                     }
                 }
         )
+        .onAppear {
+            // Start playing BGM when immersive space appears
+            bgmPlayer.playBGM(fileName: "springtime_bgm", fileExtension: "mp3", volume: 0.4)
+        }
+        .onDisappear {
+            // Stop BGM when immersive space disappears
+            bgmPlayer.stop()
+        }
     }
 
     func createWorlds() async -> Entity {
@@ -243,6 +266,10 @@ struct ImmersiveView: View {
                 content.add(flowerScene)
                 self.flowerSceneEntity = flowerScene
                 
+                // Initially hide the flower scene
+                flowerScene.isEnabled = false
+                isFlowerSceneVisible = false
+                
                 // Setup all lily entities
                 setupLilyEntity(flowerScene: flowerScene, name: "animated_blooming_lily", entity: &lilyEntity)
                 setupLilyEntity(flowerScene: flowerScene, name: "animated_blooming_lily_1", entity: &lilyEntity1)
@@ -252,6 +279,111 @@ struct ImmersiveView: View {
             }
         } catch {
             print("Failed to load FlowerBloomingScene: \(error)")
+        }
+    }
+    
+    func setupBoxInteraction() {
+        // Ensure Box has InputTarget and Collision components for tap detection
+        if box.components[InputTargetComponent.self] == nil {
+            box.components.set(InputTargetComponent())
+        }
+        
+        if box.components[CollisionComponent.self] == nil {
+            let bounds = box.visualBounds(relativeTo: box)
+            let extent = bounds.extents
+            if extent.x > 0 && extent.y > 0 && extent.z > 0 {
+                let shape = ShapeResource.generateBox(size: extent)
+                let collider = CollisionComponent(shapes: [shape])
+                box.components.set(collider)
+            }
+        }
+    }
+    
+    func toggleFlowerScene() {
+        guard let flowerScene = flowerSceneEntity else {
+            print("⚠️ FlowerBloomingScene entity not available")
+            return
+        }
+        
+        isFlowerSceneVisible.toggle()
+        flowerScene.isEnabled = isFlowerSceneVisible
+        
+        if isFlowerSceneVisible {
+            print("🌸 FlowerBloomingScene is now visible")
+        } else {
+            print("🌸 FlowerBloomingScene is now hidden")
+        }
+    }
+    
+    func applyTextboxTextures(to sceneEntity: Entity) async {
+        // Map of textbox names to texture file names
+        let textboxTextureMap: [String: String] = [
+            "Springtime_textbox": "Springtime_text",
+            "Springtime_textbox2": "Springtime_text2",
+            "Springtime_textbox3": "Springtime_text3"
+        ]
+        
+        for (textboxName, textureName) in textboxTextureMap {
+            guard let textbox = sceneEntity.findEntity(named: textboxName) else {
+                print("⚠️ Textbox '\(textboxName)' not found")
+                continue
+            }
+            
+            print("🔍 Found textbox '\(textboxName)' at position: \(textbox.position), scale: \(textbox.scale), rotation: \(textbox.orientation)")
+            
+            // Try to load texture from bundle - try both main bundle and RealityKitContent bundle
+            var textureResource: TextureResource?
+            
+            // First try RealityKitContent bundle
+            if let resource = try? await TextureResource(named: textureName, in: realityKitContentBundle) {
+                textureResource = resource
+                print("✅ Loaded texture '\(textureName)' from RealityKitContent bundle")
+            }
+            // If not found, try main bundle
+            else if let url = Bundle.main.url(forResource: textureName, withExtension: "png"),
+                    let resource = try? await TextureResource.load(contentsOf: url) {
+                textureResource = resource
+                print("✅ Loaded texture '\(textureName)' from main bundle")
+            } else {
+                print("⚠️ Texture '\(textureName).png' not found in any bundle")
+                continue
+            }
+            
+            guard let texture = textureResource else {
+                continue
+            }
+            
+            // Use SimpleMaterial for better visibility and control
+            var material = SimpleMaterial()
+            // Use texture with full brightness
+            material.color = .init(texture: .init(texture))
+            material.metallic = 0.0
+            material.roughness = 0.0 // Very low roughness for maximum visibility
+            
+            // Apply material to the textbox and all its children
+            var applied = false
+            
+            // Try to apply to the textbox itself
+            if var modelComponent = textbox.components[ModelComponent.self] {
+                modelComponent.materials = [material]
+                textbox.components.set(modelComponent)
+                print("✅ Applied texture '\(textureName)' to '\(textboxName)' directly")
+                applied = true
+            }
+            
+            // Also apply to all children to ensure visibility
+            for child in textbox.children {
+                if var childModelComponent = child.components[ModelComponent.self] {
+                    childModelComponent.materials = [material]
+                    child.components.set(childModelComponent)
+                    print("✅ Applied texture '\(textureName)' to child '\(child.name)' of '\(textboxName)'")
+                    applied = true
+                }
+            }
+            
+            if !applied {
+                print("⚠️ Could not find ModelComponent on '\(textboxName)' or its children")
+            }
         }
     }
     

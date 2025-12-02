@@ -39,7 +39,7 @@ def Xform "Root"
         active = true
     )
     {
-        reorder nameChildren = ["AnchorPortal1", "AnchorPortal2", "AnchorPortal3", "Cube", "Cube2", "Cube3", "Base", "Top", "triangle_3", "triangle_4", "triangle_5"]
+        reorder nameChildren = ["AnchorPortal1", "AnchorPortal2", "AnchorPortal3", "Cube", "Cube2", "Cube3", "Springtime_textbox3", "Springtime_textbox2", "Springtime_textbox", "Base", "Top", "triangle_3", "triangle_4", "triangle_5"]
         def "Base" (
             active = true
             prepend apiSchemas = ["MaterialBindingAPI"]
@@ -342,6 +342,91 @@ def Xform "Root"
             float3 xformOp:translate = (0.7605758, 1.778844, 1.2964904)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
+
+        def Cube "Springtime_textbox3" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            customData = {
+                float3 rotationEulerHint = (0.6206107, 2.0947526, 0.0022294521)
+            }
+        )
+        {
+            rel material:binding = </Root/GlossyBlackWoodPlank> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double size = 0.2
+            float2 ui:nodegraph:node:pos = (40, 40)
+            int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (0.47626728, 0.1517079, 0.8249191, -0.26393688)
+            float3 xformOp:scale = (8, 1.5, 0.01)
+            float3 xformOp:translate = (0.27933013, 0.19866472, 1.5744065)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+                float opacity = 0.5011285
+            }
+        }
+
+        def Cube "Springtime_textbox" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            customData = {
+                float3 rotationEulerHint = (0.6129806, 0.00024371503, -0.00079809857)
+            }
+        )
+        {
+            rel material:binding = </Root/GlossyBlackWoodPlank> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double size = 0.2
+            float2 ui:nodegraph:node:pos = (32.36331, 471.47977)
+            int ui:nodegraph:node:stackingOrder = 1
+            quatf xformOp:orient = (0.9533983, 0.3017144, -0.000004220147, -0.00041721907)
+            float3 xformOp:scale = (8, 1.5, 0.01)
+            float3 xformOp:translate = (1.5, 0.3, -0.42863053)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+                float opacity = 0.5011285
+            }
+        }
+
+        def Cube "Springtime_textbox2" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            customData = {
+                float3 rotationEulerHint = (-0.60569113, 1.0472006, 0.000021666401)
+            }
+        )
+        {
+            rel material:binding = </Root/GlossyBlackWoodPlank> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double size = 0.2
+            float2 ui:nodegraph:node:pos = (40, 40)
+            int ui:nodegraph:node:stackingOrder = 2
+            quatf xformOp:orient = (0.8266117, -0.25828618, 0.47724423, 0.14912806)
+            float3 xformOp:scale = (8, 1.5, 0.01)
+            float3 xformOp:translate = (2.6890707, 0.3, 1.5685251)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "HierarchicalFade"
+            {
+                uniform token info:id = "RealityKit.HierarchicalFade"
+                float opacity = 0.5011285
+            }
+        }
+    }
+
+    def "GlossyBlackWoodPlank" (
+        active = true
+        references = @GlossyBlackWoodPlank.usdz@
+    )
+    {
     }
 }
 

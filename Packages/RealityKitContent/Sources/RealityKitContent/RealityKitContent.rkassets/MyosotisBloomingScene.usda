@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["myosotis_1", "Bloom_01"]
+    reorder nameChildren = ["myosotis_1", "Bloom_1", "Bloom_2", "Bloom_3", "Bloom_4", "Bloom_5", "Bloom_6", "Bloom_7"]
     def "myosotis_1" (
         active = true
         customData = {
@@ -20,8 +20,8 @@ def Xform "Root"
     )
     {
         quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, -5.9604645e-8, 0)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (-0.878747, -2.0489097e-8, 1.9557774e-8)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         def RealityKitComponent "RCP_BehaviorsContainer"
@@ -45,7 +45,7 @@ def Xform "Root"
             def Preliminary_Action "Action"
             {
                 rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/Bloom_01>
+                rel animationLibraryKey = </Root/Bloom_1>
                 rel animationLibraryKeyOverrideKey = </Root/myosotis_1/OnTap/Trigger>
                 token info:id = "PlayTimeline"
                 int loops = 0
@@ -66,7 +66,7 @@ def Xform "Root"
         }
     }
 
-    def RealityKitTimeline "Bloom_01"
+    def RealityKitTimeline "Bloom_1"
     {
         def RealityKitTrack "Track"
         {
@@ -83,6 +83,505 @@ def Xform "Root"
 
                 def RealityKitStruct "handoffType"
                 {
+                    token type = "stop"
+                }
+            }
+        }
+    }
+
+    def "myosotis_2" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.570796, -1.9377911, 0)
+        }
+        references = @myosotis.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.40037113, -0.40037116, -0.5828404, -0.5828403)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (-1.2850084, -1.2665987e-7, -1.8881934)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/myosotis_2/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/myosotis_2/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/myosotis_2/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/myosotis_2>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Bloom_2>
+                rel animationLibraryKeyOverrideKey = </Root/myosotis_2/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
+    }
+
+    def "myosotis_3" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, 0.09703871, 1.4971597e-8)
+        }
+        references = @myosotis.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (-0.70627457, 0.7062747, -0.034294896, -0.034294914)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (-2.4256759, -2.9802322e-7, -2.3266773)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/myosotis_3/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/myosotis_3/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/myosotis_3/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/myosotis_3>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Bloom_3>
+                rel animationLibraryKeyOverrideKey = </Root/myosotis_3/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
+    }
+
+    def "myosotis_4" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (4.7123885, 0, 0)
+        }
+        references = @myosotis.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (1.9787561, 2.5704503e-7, -2.1339455)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/myosotis_4/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/myosotis_4/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/myosotis_4/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/myosotis_4>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Bloom_4>
+                rel animationLibraryKeyOverrideKey = </Root/myosotis_4/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
+    }
+
+    def "myosotis_5" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (4.712389, 1.8469155, 2.3841858e-7)
+        }
+        references = @myosotis.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.42643163, -0.42643166, 0.5640532, 0.5640531)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (0.8285835, 7.1153045e-7, 1.5363083)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/myosotis_5/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/myosotis_5/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/myosotis_5/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/myosotis_5>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Bloom_5>
+                rel animationLibraryKeyOverrideKey = </Root/myosotis_5/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
+    }
+
+    def "myosotis_6" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (4.7123885, -0.060771856, 2.0526992e-8)
+        }
+        references = @myosotis.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (0.7067803, -0.7067804, -0.021482795, -0.021482782)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (0.4610017, 7.599592e-7, 2.09626)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/myosotis_6/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/myosotis_6/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/myosotis_6/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/myosotis_6>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Bloom_6>
+                rel animationLibraryKeyOverrideKey = </Root/myosotis_6/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
+    }
+
+    def "myosotis_7" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (7.8539815, -1.5707963, 6.283185)
+        }
+        references = @myosotis.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.50412095, -0.504121, -0.49584484, -0.4958448)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (-1.6803479, 2.0861626e-7, 0.9409566)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/myosotis_7/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/myosotis_7/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/myosotis_7/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/myosotis_7>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Bloom_7>
+                rel animationLibraryKeyOverrideKey = </Root/myosotis_7/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+
+        def RealityKitComponent "AnimationLibrary"
+        {
+            token info:id = "RealityKit.AnimationLibrary"
+
+            def RealityKitAnimationFile "default_subtree_animation"
+            {
+                uniform bool looping = 1
+                uniform string name = "default subtree animation"
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bloom_2"
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 3.319999933242798
+                uniform token info:id = "827BE889-7A38-423D-906B-42956D0C2C3B"
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/myosotis_2>
+
+                def RealityKitStruct "handoffType"
+                {
+                    token type = "stop"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bloom_3"
+    {
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 3.319999933242798
+                uniform token info:id = "827BE889-7A38-423D-906B-42956D0C2C3B"
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/myosotis_3>
+
+                def RealityKitStruct "handoffType"
+                {
+                    token type = "stop"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bloom_4"
+    {
+        float2 ui:nodegraph:node:pos = (60, 60)
+        int ui:nodegraph:node:stackingOrder = 3
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 3.319999933242798
+                uniform token info:id = "827BE889-7A38-423D-906B-42956D0C2C3B"
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/myosotis_4>
+
+                def RealityKitStruct "handoffType"
+                {
+                    token type = "stop"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bloom_5"
+    {
+        float2 ui:nodegraph:node:pos = (80, 80)
+        int ui:nodegraph:node:stackingOrder = 4
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 3.319999933242798
+                uniform token info:id = "827BE889-7A38-423D-906B-42956D0C2C3B"
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/myosotis_5>
+
+                def RealityKitStruct "handoffType"
+                {
+                    token type = "stop"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bloom_6"
+    {
+        float2 ui:nodegraph:node:pos = (80, 80)
+        int ui:nodegraph:node:stackingOrder = 4
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 3.319999933242798
+                uniform token info:id = "827BE889-7A38-423D-906B-42956D0C2C3B"
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/myosotis_6>
+
+                def RealityKitStruct "handoffType"
+                {
+                    token type = "stop"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "Bloom_7"
+    {
+        float2 ui:nodegraph:node:pos = (100, 100)
+        int ui:nodegraph:node:stackingOrder = 5
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Animation"
+            {
+                string actionKind = "animation"
+                string animation = "default subtree animation"
+                int blendLayer = 500
+                double duration = 3.319999933242798
+                uniform token info:id = "827BE889-7A38-423D-906B-42956D0C2C3B"
+                bool separateAnimatedValue = 1
+                double startTime = 0
+                rel target = </Root/myosotis_7>
+
+                def RealityKitStruct "handoffType"
+                {
+                    token type = "stop"
                 }
             }
         }

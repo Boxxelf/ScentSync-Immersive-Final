@@ -44,9 +44,15 @@ struct ScentDetailView: View {
             // Set the current scent's immersive space ID when view appears
             appModel.currentScentImmersiveSpaceID = appModel.immersiveSpaceID(for: scent.title)
             
-            // Play springtime voiceover if this is "Springtime In A Park"
+            // Play voiceover at higher volume based on scent
             if scent.title == "Springtime In A Park" {
-                audioPlayer.playAudio(fileName: "springtime_voiceover", fileExtension: "mp3")
+                audioPlayer.playAudio(fileName: "springtime_voiceover", fileExtension: "mp3", volume: 1.0, numberOfLoops: 0)
+            } else if scent.title == "Bubble Bath" {
+                // Play bubble bath voiceover if available
+                audioPlayer.playAudio(fileName: "bubblebath_voiceover", fileExtension: "mp3", volume: 0.9, numberOfLoops: 0)
+            } else if scent.title == "Lazy Sunday Morning" {
+                // Play lazy sunday morning voiceover if available
+                audioPlayer.playAudio(fileName: "lazysunday_voiceover", fileExtension: "mp3", volume: 0.9, numberOfLoops: 0)
             }
         }
         .onDisappear {
@@ -75,7 +81,7 @@ struct ScentDetailView: View {
                 )
             
             VStack(alignment: .leading, spacing: 18) {
-                // Back button - Arrow only
+                // Back button and Logo
                 HStack {
                     Button {
                         dismiss()
@@ -85,6 +91,7 @@ struct ScentDetailView: View {
                             .foregroundStyle(.white)
                     }
                     Spacer()
+                    LogoView()
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 32)

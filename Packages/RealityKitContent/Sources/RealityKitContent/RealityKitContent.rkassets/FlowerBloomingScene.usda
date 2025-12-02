@@ -92,6 +92,7 @@ def Xform "Root"
 
                 def RealityKitStruct "handoffType"
                 {
+                    token type = "stop"
                 }
             }
         }
@@ -260,6 +261,7 @@ def Xform "Root"
 
                 def RealityKitStruct "handoffType"
                 {
+                    token type = "stop"
                 }
             }
         }
@@ -282,6 +284,7 @@ def Xform "Root"
 
                 def RealityKitStruct "handoffType"
                 {
+                    token type = "stop"
                 }
             }
         }
